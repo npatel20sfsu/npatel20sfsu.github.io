@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
+    width: 85vw;
+    height: 85vh;
+    border: solid black 1px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    background-color: black;
+}
+
+.grid div {
+    width: calc(85vw / 15);
+    height: calc(85vh / 15);
+    border-radius: 50%;
+}
+
+
+.invader {
+    background-color: green;
+    border-radius: 10px;
+}
+
+.shooter {
+    background-color: blue;
+}
+
+.laser {
+    background-color: red;
+}
+
+.boom {
+    background-color: yellow;
+}
