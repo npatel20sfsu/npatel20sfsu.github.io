@@ -1,203 +1,41 @@
-<!doctype html>
-
-<html lang="en">
+<html>
 <head>
-<style>
-  body {
-        margin: 0;
-        padding: 0;
-}
-
-.container {
-        width: 100%;
-        height: 80vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-}
-
-.grid {
-        width: 85vw;
-        height: 85vh;
-        border: solid black 1px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin: 10px auto;
-        background-color: black;
-}
-
-.grid div {
-        width: calc(85vw / 15);
-        height: calc(85vh / 15);
-        border-radius: 50%;
-}
-
-
-.invader {
-        background-color: green;
-        border-radius: 10px;
-}
-
-.shooter {
-        background-color: blue;
-}
-
-.laser {
-        background-color: red;
-}
-
-.boom {
-        background-color: yellow;
-}
-  </style>
-  
-  <meta charset="utf-8">
-
-  <title>Space Invaders</title>
-  <link rel="stylesheet" href="style.css">
-
+	<title>Car Utopia</title>
 </head>
 <body>
-  <h1> Score: </h1>
-  <h1 class="results">0</h1>
-  <div class="grid"></div>
-  <script>
-    onst grid = document.querySelector('.grid')
-const resultsDisplay = document.querySelector('.results')
-let currentShooterIndex = 202
-let width = 15
-let direction = 1
-let invadersId
-let goingRight = true
-let aliensRemoved = []
-let results = 0
+<center><h1>Car Utopia</h1>
+	<br>
+	<a href="index.html"><input type="button" value = "Home"></a> &nbsp        
+	<a href="about.html"><input type="button" value = "About"></a>&nbsp
+	<a href="survey.html"><input type="button" value = "Survey"></a>&nbsp
+        <a href="carguide.html"><input type="button" value = "Car guide"></a>&nbsp
+        <a href="services.html"><input type="button" value = "Services"></a>
+ <br><br>
+        Life is too short to drive boring cars
+<br><br>   
+        Join Car Utopia and shift to success mode        
+<br><br>
+        Presenting our exclusive collection of the most luxurious cars !!!
+<br><br>
+	<img src="mclaren.jpg" width=300>
+        <img src="bugatti.jpg" width=370> 
+<br><br>
+       -----------------Mclaren senna------------------------------Bugatti Mistral--------------------
+<br><br>
+	<img src="lamborghini.jpg" width=330> 
+	<img src="ferrari.jpg" width=330>
+<br><br>
+      ----------Lamborghini sian roadster-------------------------Ferrari F8 Spider--------------
+<br><br>   
+        Don't Dream it, Drive it
+<br><br>
+        Explore the all new luxury german cars, italian cars, and the british cars
 
-for (let i = 0; i < width*width; i++) {
-  const square = document.createElement('div')
-  grid.appendChild(square)
-}
-
-const squares = Array.from(document.querySelectorAll('.grid div'))
-
-const alienInvaders = [
-  0,1,2,3,4,5,6,7,8,9,
-  15,16,17,18,19,20,21,22,23,24,
-  30,31,32,33,34,35,36,37,38,39
-]
-
-function draw() {
-  for (let i = 0; i < alienInvaders.length; i++) {
-    if(!aliensRemoved.includes(i)) {
-      squares[alienInvaders[i]].classList.add('invader')
-    }
-  }
-}
-
-draw()
-
-function remove() {
-  for (let i = 0; i < alienInvaders.length; i++) {
-    squares[alienInvaders[i]].classList.remove('invader')
-  }
-}
-
-squares[currentShooterIndex].classList.add('shooter')
+<br><br>    Your car decides your attitude, choose it wisely.......
 
 
-function moveShooter(e) {
-  squares[currentShooterIndex].classList.remove('shooter')
-  switch(e.key) {
-    case 'ArrowLeft':
-      if (currentShooterIndex % width !== 0) currentShooterIndex -=1
-      break
-    case 'ArrowRight' :
-      if (currentShooterIndex % width < width -1) currentShooterIndex +=1
-      break
-  }
-squares[currentShooterIndex].classList.add('shooter')
-}
-document.addEventListener('keydown', moveShooter)
+</center>
+</form>
 
-function moveInvaders() {
-  const leftEdge = alienInvaders[0] % width === 0
-  const rightEdge = alienInvaders[alienInvaders.length - 1] % width === width -1
-  remove()
-
-  if (rightEdge && goingRight) {
-    for (let i = 0; i < alienInvaders.length; i++) {
-      alienInvaders[i] += width +1
-      direction = -1
-      goingRight = false
-    }
-  }
-
-  if(leftEdge && !goingRight) {
-    for (let i = 0; i < alienInvaders.length; i++) {
-      alienInvaders[i] += width -1
-      direction = 1
-      goingRight = true
-    }
-  }
-
-  for (let i = 0; i < alienInvaders.length; i++) {
-    alienInvaders[i] += direction
-  }
-
-  draw()
-
-  if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
-    resultsDisplay.innerHTML = 'GAME OVER'
-    clearInterval(invadersId)
-  }
- for (let i = 0; i < alienInvaders.length; i++) {
-    if(alienInvaders[i] > (squares.length)) {
-      resultsDisplay.innerHTML = 'GAME OVER'
-      clearInterval(invadersId)
-    }
-  }
-  if (aliensRemoved.length === alienInvaders.length) {
-    resultsDisplay.innerHTML = 'YOU WIN'
-    clearInterval(invadersId)
-  }
-}
-invadersId = setInterval(moveInvaders, 600)
-
-function shoot(e) {
-  let laserId
-  let currentLaserIndex = currentShooterIndex
-  function moveLaser() {
-    squares[currentLaserIndex].classList.remove('laser')
-    currentLaserIndex -= width
-    squares[currentLaserIndex].classList.add('laser')
-
-    if (squares[currentLaserIndex].classList.contains('invader')) {
-      squares[currentLaserIndex].classList.remove('laser')
-      squares[currentLaserIndex].classList.remove('invader')
-      squares[currentLaserIndex].classList.add('boom')
-
-      setTimeout(()=> squares[currentLaserIndex].classList.remove('boom'), 300)
-      clearInterval(laserId)
-
-      const alienRemoved = alienInvaders.indexOf(currentLaserIndex)
-      aliensRemoved.push(alienRemoved)
-      results++
-      resultsDisplay.innerHTML = results
-      console.log(aliensRemoved)
-
-    }
-
-  }
-  switch(e.key) {
-    case 'ArrowUp':
-      laserId = setInterval(moveLaser, 100)
-  }
-}
-
-document.addEventListener('keydown', shoot)
-  </script>
 </body>
-  
 </html>
